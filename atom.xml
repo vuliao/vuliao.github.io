@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.dotnic.top/"/>
-  <updated>2017-07-16T11:38:18.518Z</updated>
+  <updated>2017-07-16T11:42:15.751Z</updated>
   <id>http://blog.dotnic.top/</id>
   
   <author>
@@ -14,6 +14,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="http://blog.dotnic.top/2017/07/16/test/"/>
+    <id>http://blog.dotnic.top/2017/07/16/test/</id>
+    <published>2017-07-16T11:41:58.000Z</published>
+    <updated>2017-07-16T11:42:15.751Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="呵呵-好神奇"><a href="#呵呵-好神奇" class="headerlink" title="呵呵 好神奇"></a>呵呵 好神奇</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;呵呵-好神奇&quot;&gt;&lt;a href=&quot;#呵呵-好神奇&quot; class=&quot;headerlink&quot; title=&quot;呵呵 好神奇&quot;&gt;&lt;/a&gt;呵呵 好神奇&lt;/h2&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>尝试建了一个博客</title>
