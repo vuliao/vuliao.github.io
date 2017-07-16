@@ -33,7 +33,68 @@ window.onload = function() {
             var addNum = height>scrollTop?3:-3;
             return new Promise(function(resolve,reject){
                 scrollTop_IntervalFlag = setInterval(function(){
-                  if( (height-scrollTop)/addNum<=0 ){="" clearinterval(scrolltop_intervalflag);="" resolve();="" }="" scrolltop="" +="addNum;" scrolltopto(scrolltop);="" },speed);="" })="" new="" promise="" scrolltop_slow="" function="" removeimgs(){="" dom.imgcontainer.innerhtml="" ;="" removeimgs="" appendimg(resultarry)="" {="" var="" img,="" promisearry="[]," promise1;="" listfragment="document.createDocumentFragment();" resultarry.foreach(function(result)="" img="document.createElement("img");" img.src="result;" listfragment.appendchild(img);="" promise1="new" promise(function(resolve,="" reject)="" img.onload="function()" if="" (this.height="" <="" 120)="" this.parentnode.removechild(this);="" };="" url.revokeobjecturl(this.src);="" img.onerror="function()" promisearry.push(promise1);="" foreach="" dom.imgcontainer.appendchild(listfragment);="" return="" promise.all(promisearry)="" appendimg="" getcurrentimgnum()="" succimg="document.getElementsByTagName("img");" allimgs="succImg;" imgnum="succImg.length;" ||="" document.body.scrolltop;="" if(imgnum="=1||scrollTop==0){" [1,1];="" if(scrolltop="==_lastScrollTop){" return[_currentnum,imgnum];="" margintop="80;" lastimgoffheight="succImg[imgNum" -="" 1].offsettop;="" imgaverageheight="parseInt(lastImgOffHeight" (imgnum="" 1));="" viewheight="document.documentElement.clientHeight;" currentnum="Math.round((scrollTop+viewHeight" margintop)="" imgaverageheight);="">imgNum?imgNum:currentNum;
+                  if( (height-scrollTop)/addNum<=0 ){
+                    clearInterval(scrollTop_IntervalFlag);
+                    resolve();
+                  }
+                  scrollTop += addNum;
+                  scrollTopTo(scrollTop);
+                  
+                },speed);
+              })//new Promise
+           
+          }//scrollTop_slow
+          function removeImgs(){
+            DOM.imgContainer.innerHTML = '';
+          }//removeImgs
+          function appendImg(resultArry) {
+            var img, promiseArry = [],
+              promise1;
+            var listFragment = document.createDocumentFragment();
+            resultArry.forEach(function(result) {
+                img = document.createElement("img");
+                img.src = result;
+                listFragment.appendChild(img);
+                promise1 = new Promise(function(resolve, reject) {
+                    img.onload = function() {
+
+                      if (this.height < 120) {
+                        this.parentNode.removeChild(this);
+                      };
+                       URL.revokeObjectURL(this.src);
+                      resolve();
+                    }
+                    img.onerror = function() {
+                      this.parentNode.removeChild(this);
+                       URL.revokeObjectURL(this.src);
+                      resolve();
+                    }
+
+                  }) //new Promise
+                promiseArry.push(promise1);
+              }) //forEach
+
+            DOM.imgContainer.appendChild(listFragment);
+            return Promise.all(promiseArry)
+          } //appendImg
+          function getCurrentImgNum() {
+            var succImg =  document.getElementsByTagName("img");
+            allImgs = succImg;
+            var imgNum = succImg.length;
+             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            if(imgNum==1||scrollTop==0){
+              return [1,1];
+            }
+            if(scrollTop===_lastScrollTop){
+              return[_currentNum,imgNum];
+            }
+             var marginTop = 80;
+            var lastImgOffHeight = succImg[imgNum - 1].offsetTop;
+            var imgAverageHeight = parseInt(lastImgOffHeight / (imgNum - 1));
+            var viewHeight = document.documentElement.clientHeight;
+            
+            var currentNum = Math.round((scrollTop+viewHeight - marginTop) / imgAverageHeight);
+            currentNum = currentNum<1?1:currentNum>imgNum?imgNum:currentNum;
             var ImgOffHeight = succImg[currentNum-1].offsetTop + marginTop;
             var imgHeight = succImg[currentNum-1].offsetHeight;
             while (ImgOffHeight > scrollTop + viewHeight || ImgOffHeight + imgHeight < scrollTop) {
@@ -264,13 +325,77 @@ window.onload = function() {
                 var start, end, i;
                 var promiseArry = [];
                 start = appendNum;
-                if (filesLength - appendNum <= 0)="" {="" return="" promise.resolve(0);="" }="" else="" if="" (fileslength="" -="" appendnum="">= 5) {
+                if (filesLength - appendNum <= 0) {
+                  return Promise.resolve(0);
+                } else if (filesLength - appendNum >= 5) {
                   end = start + 5 - 1;
                 } else {
                   end = filesLength - 1;
                 }
                 appendNum = end + 1;
-                for (i = start; i <= end;="" i++)="" {="" var="" tmppromis="Promise.resolve(URL.createObjectURL(imgfiles[i]));" promisearry.push(tmppromis);="" filereader="new" filereader();="" filereader.readasdataurl(imgfiles[i]);="" promise1="new" promise(function(resolve,="" reject)="" filereader.onload="function()" resolve(this.result);="" }="" })="" new="" promise="" promisearry.push(promise1);="" for="" return="" promise.all(promisearry);="" promise.all(promisearry).then(function(resultarry)="" _this.appendimg(resultarry).then(function()="" resultarry.foreach(function(objecturl){="" url.revokeobjecturl(objecturl)="" _this.appenddelay(function(){="" _this.appendprocess();="" });="" promise.all="" getimgssrc="" getfiles:getfiles,="" getimgssrc:getimgssrc="" })();="" controller="(function(){" function="" drophandle(datatransfer){="" view.scrolltopto(0);="" model.getfiles(datatransfer).then(function(){="" view.removeimgs();="" appendprocess();="" drophandle="" appendprocess(){="" repeat(){="" model.getimgssrc().then(function(srcarr){="" if(srcarr="=0)" 0;="" view.appendimg(srcarr).then(function(){="" delay="setDelayTime();" settimeout(repeat,delay);="" repeat="" repeat();="" appendprocess="" setdelaytime(){="" imginfo="view.getCurrentImgNum();" currentnum="imginfo[0];" imgsnum="imginfo[1];" timenum="0;" mnum="imgsNum" -="" currentnum;="" if="" (mnum=""> 10) {
+                for (i = start; i <= end; i++) {
+                   var tmpPromis =  Promise.resolve(URL.createObjectURL(imgfiles[i]));
+                   promiseArry.push(tmpPromis);
+                  // var fileReader = new FileReader();
+                  // fileReader.readAsDataURL(imgfiles[i]);
+                  // var promise1 = new Promise(function(resolve, reject) {
+                  //     fileReader.onload = function() {
+                  //       resolve(this.result);
+                  //     }
+                  //   }) //new Promise
+                  // promiseArry.push(promise1);
+                } //for
+                  return Promise.all(promiseArry);
+                // Promise.all(promiseArry).then(function(resultArry) {
+                   
+                //  _this.appendImg(resultArry).then(function() {
+                //      resultArry.forEach(function(objectURL){
+                //       URL.revokeObjectURL(objectURL)
+                //     })
+                //       _this.appendDelay(function(){
+                //         _this.appendProcess();
+                //       });
+                //     });
+
+                //   }) //promise.all
+        }//getImgsSrc
+        return {
+          getfiles:getfiles,
+          getImgsSrc:getImgsSrc
+        }
+    })();
+    var Controller = (function(){
+        function dropHandle(dataTransfer){
+          view.scrollTopTo(0);
+          
+           model.getfiles(dataTransfer).then(function(){
+                view.removeImgs();
+                return appendProcess();
+
+           })
+        }//dropHandle
+        function appendProcess(){
+          function repeat(){
+            model.getImgsSrc().then(function(srcArr){
+                if(srcArr ==0) return 0;
+                
+                return view.appendImg(srcArr).then(function(){
+                  var delay =  setDelayTime();
+                  setTimeout(repeat,delay);
+                })
+            })
+          }//repeat
+         
+          repeat();
+
+        }//appendProcess
+        function setDelayTime(){
+          var imginfo = view.getCurrentImgNum();
+          var currentNum = imginfo[0];
+          var imgsNum = imginfo[1];
+          var timeNum = 0;
+          var mNum = imgsNum - currentNum;
+          if (mNum > 10) {
             mNum = mNum < 50 ? mNum : 50;
             timeNum = 200 * (mNum);
           }
@@ -374,4 +499,4 @@ function sortFunction(name1, name2) { //sort
 
   return compare;
 
-} //end sortFunction</=></=></=0>
+} //end sortFunction
