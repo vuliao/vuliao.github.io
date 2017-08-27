@@ -9,6 +9,7 @@ window.onload = function() {
       dropArea: document.getElementById("addHandle"),
       playButten: document.getElementById("play"),
       CGButten: document.getElementById("CG"),
+      scrollDownButten: document.getElementById("scrollDown"),
       imgContainer :document.getElementById("boxContainer")
     }
     var view = (function(){
@@ -181,11 +182,33 @@ window.onload = function() {
                       
                     },times);
                   })//new Promise
-                  
-
-
               }//_toImg
           }//playImg
+          function scrollNextPhase(imgNum) {
+            var marginTop = 80;
+            if(!imgNum){
+              var imginfo = getCurrentImgNum();
+              var currentNum = imginfo[0];
+            }else{
+              var currentNum = imgNum;
+            }
+            clearInterval(scrollTop_IntervalFlag);
+            var ImgOffHeight = allImgs[currentNum-1].offsetTop + marginTop;
+            var imgHeight = allImgs[currentNum-1].offsetHeight;
+            var viewHeight = document.documentElement.clientHeight;
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            if(ImgOffHeight>scrollTop){
+               return scrollTop_slow(ImgOffHeight,1).then(function(){
+                return currentNum;
+               })
+            }else if(ImgOffHeight+imgHeight>scrollTop+viewHeight){
+             return scrollTop_slow(ImgOffHeight+imgHeight-viewHeight).then(function(){
+                return currentNum+1;
+              })
+            }else {
+             return scrollNextPhase(currentNum+1);
+            }
+          }
           function setAsCG(){
             var flag =CGButtenChange();
             var currentNum;
@@ -211,9 +234,10 @@ window.onload = function() {
             appendImg :appendImg,
             playImg :playImg,
             setAsCG :setAsCG,
-            getCurrentImgNum :getCurrentImgNum
+            getCurrentImgNum :getCurrentImgNum,
+            scrollNextPhase:scrollNextPhase
           }
-        })();
+        })();//view
     var model = (function(){
       
         var imgfiles = [];
@@ -407,10 +431,14 @@ window.onload = function() {
         function CGButtenHandle(){
           view.setAsCG();
         }
+        function scrollDownButtenHandle() {
+          view.scrollNextPhase();
+        }
         return {
           dropHandle:dropHandle,
           CGButtenHandle:CGButtenHandle,
-          playButtenHandle:playButtenHandle
+          playButtenHandle:playButtenHandle,
+          scrollDownButtenHandle:scrollDownButtenHandle
         }
     })();
 
@@ -434,7 +462,9 @@ window.onload = function() {
       
       Controller.CGButtenHandle();
     }
-
+    DOM.scrollDownButten.onclick = function() {
+      Controller.scrollDownButtenHandle();
+    }
 
   } //EventHanlder
 
