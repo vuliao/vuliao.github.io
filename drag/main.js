@@ -202,7 +202,7 @@ window.onload = function() {
                 return currentNum;
                })
             }else if(ImgOffHeight+imgHeight>scrollTop+viewHeight){
-             return scrollTop_slow(ImgOffHeight+imgHeight-viewHeight).then(function(){
+             return scrollTop_slow(ImgOffHeight+imgHeight-viewHeight,1).then(function(){
                 return currentNum+1;
               })
             }else {
