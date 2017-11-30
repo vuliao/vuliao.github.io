@@ -25,7 +25,8 @@
 <li>gitHub</li>
 <li>github pages</li>
 <li>hexo</li>
-<li>markdown</li>
+<li>markdown<a id="more"></a>
+</li>
 </ul>
 <hr>
 <ul>
@@ -34,7 +35,6 @@
 <li>第三方评论平台</li>
 <li>第三方统计平台</li>
 </ul>
-<a id="more"></a>
 <p>分割线之前的 是搭建个人免费博客所必备的<br>之后的 是对个人博客的完善 是accessory    </p>
 <h4 id="然后是两个chrome插件介绍"><a href="#然后是两个chrome插件介绍" class="headerlink" title="然后是两个chrome插件介绍"></a>然后是两个chrome插件介绍</h4><ul>
 <li>极简图床</li>
