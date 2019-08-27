@@ -159,9 +159,9 @@ window.onload = function () {
         };
         DOM.video.onclick = function () {
             if (video.paused) {
-                video.play();
+               // video.play();
             } else {
-                video.pause();
+               // video.pause();
             }
             if (isDbClick(this)) {
                 if (screenfull.enabled) {
