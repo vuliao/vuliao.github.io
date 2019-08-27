@@ -188,9 +188,9 @@ window.onload = function () {
                     break;
                 case 32: //空格
                     if (video.paused) {
-                        video.play();
+                       // video.play();
                     } else {
-                        video.pause();
+                        //video.pause();
                     }
             }
         }
